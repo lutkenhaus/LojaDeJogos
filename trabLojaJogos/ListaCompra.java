@@ -28,22 +28,6 @@ class ListaCompra {
             // novo.vagaoPosterior.vagaoAnterior = head;
             novo.getProx().setAnt(head);
         }
-
-        // if (listaVazia()) {
-        //     head = novo;
-        //     tail = novo;
-        // } else {
-        //     // novo.jogoPosterior = head;
-        //     novo.setAnt(head);
-        //     // novo.jogoAnterior = tail;
-        //     novo.setAnt(tail);
-
-        //     head = novo;
-        //     // novo.jogoPosterior.jogoAnterior = novo;
-        //     novo.getProx().setAnt(novo);
-        //     // tail.jogoPosterior = novo;
-        //     tail.setProx(novo);
-        // }
     }
 
     public void adicionarFinal(Compra compra) {
@@ -82,6 +66,19 @@ class ListaCompra {
             System.out.println("------------------------------------");
             aux = aux.getProx();
         }
+    }
+
+    public int contaGasto(String cpf) {
+        ElementoCompra aux = head;
+        int contador = 0;
+
+        while (aux != null) {
+            Compra compra = aux.getDadosCompra();
+            if (cpf.equals(compra.getCpf())) contador++;
+            aux = aux.getProx();
+        }
+
+        return contador;
     }
 
     public void toFile(String fileName) throws IOException {
