@@ -68,6 +68,8 @@ class App {
             String line = leitor.nextLine();
             Compra compra = getCompraFromLine(line);
             lista.adicionarInicio(compra);
+
+            // @TODO: Pesquisar o cliente na arvore e insere a compra na lista dele
         }
 
         leitor.close();
