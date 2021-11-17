@@ -1,4 +1,6 @@
-// package trabalhoLojaJogos.trabLojaJogos;
+package Estruturas;
+
+import Entidades.Compra;
 
 class ElementoCompra {
     private Compra dadosCompra;

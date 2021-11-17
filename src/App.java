@@ -1,21 +1,23 @@
-// package trabalhoLojaJogos.trabLojaJogos;
-
 import java.io.*;
 import java.util.Scanner;
-import java.util.*;
+
+import Entidades.*;
+import Estruturas.*;
 
 class App {
 
     public static void main(String[] args) throws Exception {
         // Carrega estruturas
-        ABB arvoreClientes = montaArvoreClientes("../arquivosLoja/ClientesJogos_2021-2.txt");
-        ListaCompra listaCompras = montaListaCompra("../arquivosLoja/ComprasJogos1.txt");
+        ABB arvoreClientes = montaArvoreClientes("ClientesJogos_2021-2.txt");
+        ListaCompra listaCompras = montaListaCompra("ComprasJogos1.txt");
 
         Scanner in = new Scanner(System.in);
         String buscaCpf;
-        limparTela();
         int opc = 54, ok = 0;
+        
+        limparTela();
 
+        // Menu
 		while (opc != 0) {
 			System.out.println("/ Loja de Jogos /");
 			System.out.println("(1) Buscar cliente");
@@ -24,7 +26,7 @@ class App {
 			System.out.printf("\nDigite a opção desejada: ");
 			do {
 				opc = Integer.parseInt(in.nextLine());
-				if (opc >= 0 && opc <= 5) {
+				if (opc >= 0 && opc <= 2) {
 					ok = 1;
 				} else {
 					System.out.printf("\n\tOPÇÃO INVÁLIDA! Digite novamente: ");
@@ -50,7 +52,7 @@ class App {
                     break;
             }
 
-            in.nextLine();
+            if (opc != 0) in.nextLine();
             limparTela();
         }
         in.close();

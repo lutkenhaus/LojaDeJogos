@@ -1,4 +1,6 @@
+package Estruturas;
 
+import Entidades.Cliente;
 
 public class ABB {
     Nodo raiz;

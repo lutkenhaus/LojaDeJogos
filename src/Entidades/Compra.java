@@ -1,6 +1,6 @@
-// package trabalhoLojaJogos.trabLojaJogos;
+package Entidades;
 
-class Compra {
+public class Compra {
     private String cpf;
     private int idJogo;
     private String data;

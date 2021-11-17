@@ -1,9 +1,11 @@
+package Estruturas;
+
 import java.io.IOException;
 import java.io.FileWriter;
 
-// package trabalhoLojaJogos.trabLojaJogos;
+import Entidades.Compra;
 
-class ListaCompra {
+public class ListaCompra {
     private ElementoCompra head;
     private ElementoCompra tail;
 

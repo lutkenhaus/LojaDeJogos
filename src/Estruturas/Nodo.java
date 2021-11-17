@@ -1,3 +1,7 @@
+package Estruturas;
+
+import Entidades.Cliente;
+
 public class Nodo {
     Cliente meuCliente;
 

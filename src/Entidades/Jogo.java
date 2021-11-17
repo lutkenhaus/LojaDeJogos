@@ -1,4 +1,4 @@
-// package trabalhoLojaJogos.trabLojaJogos;
+package Entidades;
 
 class Jogo {
     private int idJogo;
