@@ -83,6 +83,10 @@ public class ListaCompra {
         return contador;
     }
 
+    public ElementoCompra getElementoHead() {
+        return this.head;
+    }
+
     public void toFile(String fileName) throws IOException {
         FileWriter outputFile = new FileWriter(fileName);
         ElementoCompra aux = head;

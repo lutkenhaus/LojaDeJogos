@@ -2,7 +2,7 @@ package Estruturas;
 
 import Entidades.Compra;
 
-class ElementoCompra {
+public class ElementoCompra {
     private Compra dadosCompra;
     private ElementoCompra prox;
     private ElementoCompra ant;

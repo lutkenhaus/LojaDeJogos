@@ -9,8 +9,8 @@ class App {
     public static void main(String[] args) throws Exception {
         // Carrega estruturas
         ABB arvoreClientes = montaArvoreClientes("ClientesJogos_2021-2.txt");
-        ListaCompra listaCompras = montaListaCompra("ComprasJogos1.txt");
-
+        montaListaCompra("ComprasJogos1.txt", arvoreClientes);
+        
         Scanner in = new Scanner(System.in);
         String buscaCpf;
         int opc = 54, ok = 0;
@@ -21,7 +21,6 @@ class App {
 		while (opc != 0) {
 			System.out.println("/ Loja de Jogos /");
 			System.out.println("(1) Buscar cliente");
-			System.out.println("(2) Contar gasto total");
 			System.out.println("(0) Para sair");
 			System.out.printf("\nDigite a opção desejada: ");
 			do {
@@ -43,11 +42,6 @@ class App {
                         System.out.println("Cliente não encontrado!\n");
                     }
                     break;
-                case 2:
-                    System.out.print("CPF a ser pesquisado: ");
-                    buscaCpf = in.nextLine();
-                    System.out.println("O CPF informado aparece " + listaCompras.contaGasto(buscaCpf) + " vezes");
-                    break;
                 default:
                     break;
             }
@@ -58,22 +52,24 @@ class App {
         in.close();
     }
 
-    public static ListaCompra montaListaCompra(String nomeArquivo) throws Exception {
+    public static void montaListaCompra(String nomeArquivo, ABB arvoreClientes) throws Exception {
 
-        ListaCompra lista = new ListaCompra();
         File arquivoCompra = new File(nomeArquivo);
         Scanner leitor = new Scanner(arquivoCompra);
 
         while (leitor.hasNextLine()) {
             String line = leitor.nextLine();
             Compra compra = getCompraFromLine(line);
-            lista.adicionarInicio(compra);
 
-            // @TODO: Pesquisar o cliente na arvore e insere a compra na lista dele
+            // Insere a compra na lista de compras do cliente
+            try {
+                Cliente busca = arvoreClientes.buscaCliente(new Cliente(compra.getCpf(), "", "", ""), arvoreClientes);
+                busca.getlistaCompras().adicionarInicio(compra);
+            } catch (Exception err) {}
+            
         }
 
         leitor.close();
-        return lista;
     }
 
     public static ABB montaArvoreClientes(String nomeArquivo) throws Exception {

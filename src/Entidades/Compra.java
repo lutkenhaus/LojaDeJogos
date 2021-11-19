@@ -4,13 +4,13 @@ public class Compra {
     private String cpf;
     private int idJogo;
     private String data;
-    private int avaliaçãoDoJogo;
+    private int avaliacaoDoJogo;
 
-    public Compra(String cpf, int idJogo, String data, int avaliaçãoDoJogo) {
+    public Compra(String cpf, int idJogo, String data, int avaliacaoDoJogo) {
         this.cpf = cpf;
         this.idJogo = idJogo;
         this.data = data;
-        this.avaliaçãoDoJogo = avaliaçãoDoJogo;
+        this.avaliacaoDoJogo = avaliacaoDoJogo;
     }
 
     public String getCpf() {
@@ -37,15 +37,15 @@ public class Compra {
         this.data = data;
     }
 
-    public int getAvaliaçãoDoJogo() {
-        return this.avaliaçãoDoJogo;
+    public int getavaliacaoDoJogo() {
+        return this.avaliacaoDoJogo;
     }
 
-    public void setAvaliaçãoDoJogo(int avaliaçãoDoJogo) {
-        this.avaliaçãoDoJogo = avaliaçãoDoJogo;
+    public void setavaliacaoDoJogo(int avaliacaoDoJogo) {
+        this.avaliacaoDoJogo = avaliacaoDoJogo;
     }
 
     public String toString() {
-        return "CPF: " + this.cpf + " | Id: " + this.idJogo + " | Data: " + this.data + " | Avaliação: " + this.avaliaçãoDoJogo;
+        return "CPF: " + this.cpf + " | Id: " + this.idJogo + " | Data: " + this.data + " | Avaliação: " + this.avaliacaoDoJogo;
     }
 }
