@@ -106,16 +106,16 @@ public class ABB {
         }
     }
 
-    public String dadosArvore(ABB subarvore){
-        if(subarvore == null)
-            return "";
-        else{
-            String aux = dadosArvore(subarvore.subarvoreEsquerda);
-            aux += subarvore.raiz.meuCliente.dadosCliente();
-            aux += dadosArvore(subarvore.subarvoreDireita);
-            return aux;
-        }
-    }
+    // public String dadosArvore(ABB subarvore){
+    //     if(subarvore == null)
+    //         return "";
+    //     else{
+    //         String aux = dadosArvore(subarvore.subarvoreEsquerda);
+    //         aux += subarvore.raiz.meuCliente.dadosCliente();
+    //         aux += dadosArvore(subarvore.subarvoreDireita);
+    //         return aux;
+    //     }
+    // }
 
 
 }

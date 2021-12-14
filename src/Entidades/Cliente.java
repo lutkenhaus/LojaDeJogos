@@ -1,6 +1,7 @@
 package Entidades;
 
 import Estruturas.ListaCompra;
+import Estruturas.TabHashJogoId;
 import Estruturas.ElementoCompra;
 
 public class Cliente {
@@ -67,25 +68,26 @@ public class Cliente {
         return this.cpf.compareTo(outro.cpf) < 0;
     }
 
-    public int contaGasto() {
+    public Double contaGasto(TabHashJogoId tabelaJogos) {
         ElementoCompra aux = listaCompras.getElementoHead();
-        int contador = 0;
+        Double totalGasto = 0.0;
 
         while (aux != null) {
-            contador++;
+            Jogo jogoAux = tabelaJogos.buscar(new Jogo(aux.getDadosCompra().getIdJogo(), "", "", "", 0.0));
+            totalGasto += jogoAux.getPreco();
             aux = aux.getProx();
         }
 
-        return contador;
+        return totalGasto;
     }
 
-    public String dadosCliente() {
+    public String dadosCliente(TabHashJogoId tabelaJogos) {
         String auxDados="---------------------\n";
         auxDados+= "CPF: " + this.cpf + "\n";
         auxDados+= "Nome: " + this.nome + "\n";
         auxDados+= "Nickname: " + this.nickname + "\n";
         auxDados+= "Senha: " + this.senha + "\n";
-        auxDados+= "Quantidade de compras: " + this.contaGasto() + "\n";
+        auxDados+= "Total gasto: " + this.contaGasto(tabelaJogos) + "\n";
         return auxDados;
     }
 }

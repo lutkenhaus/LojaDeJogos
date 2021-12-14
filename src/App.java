@@ -8,11 +8,14 @@ class App {
 
     public static void main(String[] args) throws Exception {
         // Carrega estruturas
-        ABB arvoreClientes = montaArvoreClientes("ClientesJogos_2021-2.txt");
-        montaListaCompra("ComprasJogos1.txt", arvoreClientes);
+        ABB arvoreClientes = montaArvoreClientes("dados2ClientesJogos2021-2.txt");
+        montaListaCompra("dados2Compras2021-2.txt", arvoreClientes);
+
+        TabHashJogoId tabelaJogosId = montaTabelaHashJogosId("dados2JogosGames2021-2.txt");
+        TabHashJogoLancamento tabelaJogosLancamento = montaTabelaHashJogosLancamento("dados2JogosGames2021-2.txt");
         
         Scanner in = new Scanner(System.in);
-        String buscaCpf;
+        String buscaCpf, buscaAnoLancamento;
         int opc = 54, ok = 0;
         
         limparTela();
@@ -20,7 +23,8 @@ class App {
         // Menu
 		while (opc != 0) {
 			System.out.println("/ Loja de Jogos /");
-			System.out.println("(1) Buscar cliente");
+			System.out.println("(1) Totalizar gastos");
+            System.out.println("(2) Buscar jogos por ano de lançamento");
 			System.out.println("(0) Para sair");
 			System.out.printf("\nDigite a opção desejada: ");
 			do {
@@ -37,10 +41,16 @@ class App {
                     buscaCpf = in.nextLine();
                     try {
                         Cliente busca = arvoreClientes.buscaCliente(new Cliente(buscaCpf, "", "", ""), arvoreClientes);
-                        System.out.println(busca.dadosCliente());
+                        System.out.println(busca.dadosCliente(tabelaJogosId));
                     } catch (Exception err) {
                         System.out.println("Cliente não encontrado!\n");
                     }
+                    break;
+                case 2:
+                    System.out.print("Ano: ");
+                    buscaAnoLancamento = in.nextLine();
+                    ListaEncadeada listaJogos = tabelaJogosLancamento.buscar(new Jogo(0, "", "", buscaAnoLancamento, 0.0));
+                    listaJogos.imprimir();
                     break;
                 default:
                     break;
@@ -90,6 +100,36 @@ class App {
         return arvoreClientes;
     }
 
+    public static TabHashJogoId montaTabelaHashJogosId(String nomeArquivo) throws Exception {
+        File arquivoJogos = new File(nomeArquivo);
+        Scanner leitor = new Scanner(arquivoJogos);
+        TabHashJogoId tabelaJogos = new TabHashJogoId(500);
+
+        while (leitor.hasNextLine()) {
+            String line = leitor.nextLine();
+            Jogo jogo = getJogoFromLine(line);
+            tabelaJogos.inserir(jogo);
+        }
+
+        leitor.close();
+        return tabelaJogos;
+    }
+
+    public static TabHashJogoLancamento montaTabelaHashJogosLancamento(String nomeArquivo) throws Exception {
+        File arquivoJogos = new File(nomeArquivo);
+        Scanner leitor = new Scanner(arquivoJogos);
+        TabHashJogoLancamento tabelaJogos = new TabHashJogoLancamento(500);
+
+        while (leitor.hasNextLine()) {
+            String line = leitor.nextLine();
+            Jogo jogo = getJogoFromLine(line);
+            tabelaJogos.inserir(jogo);
+        }
+
+        leitor.close();
+        return tabelaJogos;
+    }
+
     public static Compra getCompraFromLine(String line) {
         String[] lParts = line.split(";");
         Compra c = new Compra(lParts[0], Integer.parseInt(lParts[1]), lParts[2], Integer.parseInt(lParts[3]));
@@ -100,6 +140,12 @@ class App {
         String[] lParts = line.split(";");
         Cliente cl = new Cliente(lParts[0], lParts[1], lParts[2], lParts[3]);
         return cl;
+    }
+
+    public static Jogo getJogoFromLine(String line) {
+        String[] lParts = line.split(";");
+        Jogo j = new Jogo(Integer.parseInt(lParts[0]), lParts[1], lParts[2], lParts[3], Double.parseDouble(lParts[4].replace(",",".")));
+        return j;
     }
 
     public static void limparTela() {
