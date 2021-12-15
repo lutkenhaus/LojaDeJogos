@@ -7,12 +7,16 @@ public class Jogo {
     private String anoLançamento;
     private Double preco;
 
+    /* Propriedade extra que armazena o calculo posterior da media das avaliacoes */
+    private Double mediaAvaliacoes;
+
     public Jogo(int idJogo, String nomeJogo, String plataforma, String anoLançamento, Double preco) {
         this.idJogo = idJogo;
         this.nomeJogo = nomeJogo;
         this.plataforma = plataforma;
         this.anoLançamento = anoLançamento;
         this.preco = preco;
+        this.mediaAvaliacoes = 0.0;
     }
 
     public int getIdJogo() {
@@ -55,8 +59,24 @@ public class Jogo {
         this.preco = preco;
     }
 
+    public Double getMediaAvaliacoes() {
+        return this.mediaAvaliacoes;
+    }
+
+    public void setMediaAvaliacoes(Double mediaAvaliacoes) {
+        this.mediaAvaliacoes = mediaAvaliacoes;
+    }
+
     public boolean igual(Jogo jogo) {
         return this.idJogo == jogo.idJogo;
+    }
+
+    public boolean menor(Jogo jogo) {
+        return this.getMediaAvaliacoes() < jogo.getMediaAvaliacoes();
+    }
+
+    public boolean maior(Jogo jogo) {
+        return this.getMediaAvaliacoes() > jogo.getMediaAvaliacoes();
     }
 
 }

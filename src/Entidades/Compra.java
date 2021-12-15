@@ -48,4 +48,8 @@ public class Compra {
     public String toString() {
         return "CPF: " + this.cpf + " | Id: " + this.idJogo + " | Data: " + this.data + " | Avaliação: " + this.avaliacaoDoJogo;
     }
+
+    public boolean igual(Compra outro){
+        return this.cpf.equals(outro.cpf) && this.data.equals(outro.getData()) && this.idJogo == outro.getIdJogo();
+    }
 }

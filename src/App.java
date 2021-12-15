@@ -13,6 +13,7 @@ class App {
 
         TabHashJogoId tabelaJogosId = montaTabelaHashJogosId("dados2JogosGames2021-2.txt");
         TabHashJogoLancamento tabelaJogosLancamento = montaTabelaHashJogosLancamento("dados2JogosGames2021-2.txt");
+        TabHashCompras tabelaCompras = montaTabelaHashCompras("dados2Compras2021-2.txt");
         
         Scanner in = new Scanner(System.in);
         String buscaCpf, buscaAnoLancamento;
@@ -25,11 +26,12 @@ class App {
 			System.out.println("/ Loja de Jogos /");
 			System.out.println("(1) Totalizar gastos");
             System.out.println("(2) Buscar jogos por ano de lançamento");
+            System.out.println("(3) Gerar relatório avaliações");
 			System.out.println("(0) Para sair");
 			System.out.printf("\nDigite a opção desejada: ");
 			do {
 				opc = Integer.parseInt(in.nextLine());
-				if (opc >= 0 && opc <= 2) {
+				if (opc >= 0 && opc <= 3) {
 					ok = 1;
 				} else {
 					System.out.printf("\n\tOPÇÃO INVÁLIDA! Digite novamente: ");
@@ -49,8 +51,12 @@ class App {
                 case 2:
                     System.out.print("Ano: ");
                     buscaAnoLancamento = in.nextLine();
-                    ListaEncadeada listaJogos = tabelaJogosLancamento.buscar(new Jogo(0, "", "", buscaAnoLancamento, 0.0));
+                    ListaEncadeadaJogo listaJogos = tabelaJogosLancamento.buscar(new Jogo(0, "", "", buscaAnoLancamento, 0.0));
                     listaJogos.imprimir();
+                    break;
+                case 3:
+                    ListaEncadeadaJogo listaJogosMaisBemAvaliados = tabelaCompras.getJogosMaisBemAvaliados(tabelaJogosId);
+                    listaJogosMaisBemAvaliados.imprimir();
                     break;
                 default:
                     break;
@@ -72,11 +78,11 @@ class App {
             Compra compra = getCompraFromLine(line);
 
             // Insere a compra na lista de compras do cliente
+
             try {
                 Cliente busca = arvoreClientes.buscaCliente(new Cliente(compra.getCpf(), "", "", ""), arvoreClientes);
                 busca.getlistaCompras().adicionarInicio(compra);
             } catch (Exception err) {}
-            
         }
 
         leitor.close();
@@ -128,6 +134,21 @@ class App {
 
         leitor.close();
         return tabelaJogos;
+    }
+
+    public static TabHashCompras montaTabelaHashCompras(String nomeArquivo) throws Exception {
+        File arquivoCompras = new File(nomeArquivo);
+        Scanner leitor = new Scanner(arquivoCompras);
+        TabHashCompras tabelaCompras = new TabHashCompras(500);
+
+        while (leitor.hasNextLine()) {
+            String line = leitor.nextLine();
+            Compra compra = getCompraFromLine(line);
+            tabelaCompras.inserir(compra);
+        }
+
+        leitor.close();
+        return tabelaCompras;
     }
 
     public static Compra getCompraFromLine(String line) {

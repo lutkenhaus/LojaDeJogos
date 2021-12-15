@@ -2,11 +2,11 @@ package Estruturas;
 
 import Entidades.Jogo;
 
-public class ListaEncadeada {
+public class ListaEncadeadaJogo {
     public ElementoJogo primeiro;
     public ElementoJogo ultimo;
 
-    public ListaEncadeada(){
+    public ListaEncadeadaJogo(){
         primeiro = new ElementoJogo(null);
         ultimo = primeiro;
     }
@@ -51,11 +51,16 @@ public class ListaEncadeada {
 
     public void imprimir(){
         ElementoJogo aux = primeiro.getProx();
+
+        if (aux == null) {
+            System.out.println("Não existem dados...");
+            return;
+        }
         
         while(aux!=null){
-            System.out.println(aux.getDadosJogo().getNomeJogo() + " - "+ aux.getDadosJogo().getIdJogo());
+            Jogo jogo = aux.getDadosJogo();
+            System.out.println(((jogo.getMediaAvaliacoes() > 0.0) ? "[" + jogo.getMediaAvaliacoes() + "] " : "") + jogo.getIdJogo() + " - \"" + jogo.getNomeJogo() + "\" (" + jogo.getAnoLançamento() + ")");
             aux = aux.getProx();
         }
-        System.out.println("FIM DA LISTA.");
     }
 }

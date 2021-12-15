@@ -5,15 +5,15 @@ import Entidades.Jogo;
 public class TabHashJogoId {
     int capacidade;
     int quantidade;
-    ListaEncadeada[] dados;
+    ListaEncadeadaJogo[] dados;
     
     public TabHashJogoId(int cap){
         this.capacidade = cap;
         this.quantidade = 0;
-        dados = new ListaEncadeada[this.capacidade];  // o que temos no vetor agora? NADA!!!
+        dados = new ListaEncadeadaJogo[this.capacidade];  // o que temos no vetor agora? NADA!!!
 
         for(int i=0; i<this.capacidade; i++){
-            dados[i] = new ListaEncadeada();
+            dados[i] = new ListaEncadeadaJogo();
         }   //agora sim, temos uma lista vazia em cada posição.
     }
 
