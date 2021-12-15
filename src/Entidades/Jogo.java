@@ -4,17 +4,17 @@ public class Jogo {
     private int idJogo;
     private String nomeJogo;
     private String plataforma;
-    private String anoLançamento;
+    private String anoLancamento;
     private Double preco;
 
     /* Propriedade extra que armazena o calculo posterior da media das avaliacoes */
     private Double mediaAvaliacoes;
 
-    public Jogo(int idJogo, String nomeJogo, String plataforma, String anoLançamento, Double preco) {
+    public Jogo(int idJogo, String nomeJogo, String plataforma, String anoLancamento, Double preco) {
         this.idJogo = idJogo;
         this.nomeJogo = nomeJogo;
         this.plataforma = plataforma;
-        this.anoLançamento = anoLançamento;
+        this.anoLancamento = anoLancamento;
         this.preco = preco;
         this.mediaAvaliacoes = 0.0;
     }
@@ -43,12 +43,12 @@ public class Jogo {
         this.plataforma = plataforma;
     }
 
-    public String getAnoLançamento() {
-        return this.anoLançamento;
+    public String getAnoLancamento() {
+        return this.anoLancamento;
     }
 
-    public void setAnoLançamento(String anoLançamento) {
-        this.anoLançamento = anoLançamento;
+    public void setAnoLancamento(String anoLancamento) {
+        this.anoLancamento = anoLancamento;
     }
 
     public Double getPreco() {

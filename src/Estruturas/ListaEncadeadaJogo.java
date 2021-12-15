@@ -59,7 +59,7 @@ public class ListaEncadeadaJogo {
         
         while(aux!=null){
             Jogo jogo = aux.getDadosJogo();
-            System.out.println(((jogo.getMediaAvaliacoes() > 0.0) ? "[" + jogo.getMediaAvaliacoes() + "] " : "") + jogo.getIdJogo() + " - \"" + jogo.getNomeJogo() + "\" (" + jogo.getAnoLançamento() + ")");
+            System.out.println(((jogo.getMediaAvaliacoes() > 0.0) ? "[" + jogo.getMediaAvaliacoes() + "] " : "") + jogo.getIdJogo() + " - \"" + jogo.getNomeJogo() + "\" (" + jogo.getAnoLancamento() + ")");
             aux = aux.getProx();
         }
     }

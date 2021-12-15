@@ -18,7 +18,7 @@ public class TabHashJogoLancamento {
     }
 
     public int funcaoHash(Jogo jogo){
-        int posicao = Integer.parseInt(jogo.getAnoLançamento());
+        int posicao = Integer.parseInt(jogo.getAnoLancamento());
         return(posicao % capacidade);
     }
 
