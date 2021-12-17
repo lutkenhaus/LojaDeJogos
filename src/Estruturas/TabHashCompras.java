@@ -6,36 +6,36 @@ public class TabHashCompras {
     int capacidade;
     int quantidade;
     ListaEncadeadaCompra[] dados;
-    
-    public TabHashCompras(int cap){
+
+    public TabHashCompras(int cap) {
         this.capacidade = cap;
         this.quantidade = 0;
-        dados = new ListaEncadeadaCompra[this.capacidade];  // o que temos no vetor agora? NADA!!!
+        dados = new ListaEncadeadaCompra[this.capacidade];
 
-        for(int i=0; i<this.capacidade; i++){
+        for (int i = 0; i < this.capacidade; i++) {
             dados[i] = new ListaEncadeadaCompra();
-        }   //agora sim, temos uma lista vazia em cada posição.
+        }
     }
 
-    public int funcaoHash(Compra compra){
+    public int funcaoHash(Compra compra) {
         int posicao = compra.getIdJogo();
-        return(posicao % capacidade);
+        return (posicao % capacidade);
     }
 
-    public void inserir(Compra compra){
+    public void inserir(Compra compra) {
         int posicao = funcaoHash(compra);
         dados[posicao].inserir(compra);
         quantidade++;
     }
 
-    public ListaEncadeadaCompra buscar(Compra quem){        //compra "mock" para busca
+    public ListaEncadeadaCompra buscar(Compra quem) {
         int posicao = funcaoHash(quem);
         return dados[posicao];
     }
 
     public ListaEncadeadaJogo getJogosMaisBemAvaliados(TabHashJogoId tabelaJogos) {
         ListaEncadeadaJogo jogos = new ListaEncadeadaJogo();
-        for (int i=0; i<dados.length; i++) {
+        for (int i = 0; i < dados.length; i++) {
             ElementoCompra elementoCompraAtual = dados[i].primeiro.getProx();
             if (elementoCompraAtual == null || elementoCompraAtual.getDadosCompra() == null) {
                 continue;
@@ -54,9 +54,10 @@ public class TabHashCompras {
         ElementoJogo anterior = null;
         boolean inserido = false;
 
-        for (ElementoJogo elementoJogo = jogos.primeiro.getProx(); elementoJogo != null; elementoJogo = elementoJogo.getProx()) {
+        for (ElementoJogo elementoJogo = jogos.primeiro.getProx(); elementoJogo != null; elementoJogo = elementoJogo
+                .getProx()) {
             if (elementoJogo.getDadosJogo().menor(jogo)) {
-                ElementoJogo novoElemento = new ElementoJogo(jogo);       
+                ElementoJogo novoElemento = new ElementoJogo(jogo);
                 novoElemento.setProx(elementoJogo);
 
                 if (anterior != null) {
@@ -78,7 +79,8 @@ public class TabHashCompras {
 
     public void limitaListaJogos(ListaEncadeadaJogo jogos) {
         int quantidade = 0;
-        for (ElementoJogo elementoJogo = jogos.primeiro.getProx(); elementoJogo != null; elementoJogo = elementoJogo.getProx()) {
+        for (ElementoJogo elementoJogo = jogos.primeiro.getProx(); elementoJogo != null; elementoJogo = elementoJogo
+                .getProx()) {
             quantidade++;
             if (quantidade >= 10) {
                 elementoJogo.setProx(null);
@@ -86,13 +88,13 @@ public class TabHashCompras {
         }
     }
 
-    public void imprimirTudo(){
-        
-        for(int i=0; i<capacidade; i++){
-            System.out.println("Posição "+i);
+    public void imprimirTudo() {
+
+        for (int i = 0; i < capacidade; i++) {
+            System.out.println("Posição " + i);
             dados[i].imprimir();
-            System.out.println("Média das avaliações: " + dados[i].getMediaAvaliacoes()); 
+            System.out.println("Média das avaliações: " + dados[i].getMediaAvaliacoes());
         }
     }
-    
+
 }

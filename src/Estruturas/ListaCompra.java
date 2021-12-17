@@ -20,14 +20,12 @@ public class ListaCompra {
 
         ElementoCompra novo = new ElementoCompra(compra);
 
-        if(listaVazia()) {
+        if (listaVazia()) {
             head = novo;
             tail = novo;
-         } else {
-            // novo.vagaoPosterior = head;
+        } else {
             novo.setProx(head);
             head = novo;
-            // novo.vagaoPosterior.vagaoAnterior = head;
             novo.getProx().setAnt(head);
         }
     }
@@ -40,14 +38,10 @@ public class ListaCompra {
             head = novo;
             tail = novo;
         } else {
-            // novo.vagaoPosterior = head;
             novo.setProx(head);
-            // novo.vagaoAnterior = tail;
             novo.setAnt(tail);
             tail = novo;
-            // novo.vagaoPosterior.vagaoAnterior = novo;
             novo.getProx().setAnt(novo);
-            // novo.vagaoAnterior.vagaoPosterior = novo;
             novo.getAnt().setProx(novo);
         }
     }
@@ -60,7 +54,7 @@ public class ListaCompra {
 
             System.out.println("- Compra -");
             System.out.println(compra.toString());
-            
+
             if (aux.getAnt() != null)
                 System.out.println("ID Anterior: " + aux.getAnt().getDadosCompra().getIdJogo());
             if (aux.getProx() != null)
@@ -76,7 +70,8 @@ public class ListaCompra {
 
         while (aux != null) {
             Compra compra = aux.getDadosCompra();
-            if (cpf.equals(compra.getCpf())) contador++;
+            if (cpf.equals(compra.getCpf()))
+                contador++;
             aux = aux.getProx();
         }
 
@@ -100,5 +95,5 @@ public class ListaCompra {
 
         outputFile.close();
     }
-    
+
 }
